@@ -1,166 +1,100 @@
-import { useForm, ValidationError } from "@formspree/react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  });
-
-  const [state, handleSubmit] = useForm("xyeyjrnj");
-  const [showSuccess, setShowSuccess] = useState(false);
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  }
-
-  async function handleFormSubmit(e) {
-    e.preventDefault();
-    await handleSubmit(e);
-  }
-
-  useEffect(() => {
-    if (state.succeeded) {
-
-      setFormData({
-        name: "",
-        email: "",
-        message: ""
-      });
-
-     
-      setShowSuccess(true);
-
-     
-      const timer = setTimeout(() => {
-        setShowSuccess(false);
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [state.succeeded]);
+  const [showContact, setShowContact] = useState(false);
 
   return (
-    <section className="section section-alt" id="contact">
-
+    <section className="section contact-section" id="contact">
       <div className="container">
 
-        <div className="section-heading">
-          <p>Get In Touch</p>
-          <h2>Contact Me</h2>
-        </div>
+        <button
+          className="projects-toggle"
+          onClick={() => setShowContact(!showContact)}
+        >
+          <span>Contact Me</span>
 
-        <div className="contact-container">
+          <span className="projects-arrow">
+            {showContact ? "↑" : "↓"}
+          </span>
+        </button>
 
-          <div className="contact-info">
-            <h3>Let's build real projects together.</h3>
+        {showContact && (
+          <div className="projects-content">
 
-            <p>
-              Have a project, opportunity or question?
-              Feel free to get in touch.
-            </p>
-
-            <div className="contact-item">
-              <span>📧</span>
-              <div>
-                <strong>Email</strong>
-                <p>abrahamdasta48@gmail.com</p>
-              </div>
+            <div className="section-heading">
+             
             </div>
 
-            <div className="contact-item">
-              <span>📍</span>
-              <div>
-                <strong>Location</strong>
-                <p>Addis Ababa, Ethiopia</p>
+            <div className="contact-content">
+
+              <div className="contact-intro">
+                <span className="contact-label">
+                  Have a project in mind?
+                </span>
+
+                <h3>
+                  Let's build something
+                  <span> meaningful together.</span>
+                </h3>
+
+                <p>
+                  I am open to software development opportunities,
+                  freelance projects, internships, collaborations,
+                  and other opportunities where I can contribute
+                  and continue growing as a developer.
+                </p>
               </div>
+
+              <div className="contact-details">
+
+                <div className="contact-item">
+                  <span>Email</span>
+                  <a href="abrahamdasta48@gmail.com">
+                    abrahamdasta48@gmail.com
+                  </a>
+                </div>
+
+                <div className="contact-item">
+                  <span>Phone</span>
+                  <a href="tel:+251931325733">
+                    +251 931325733
+                  </a>
+                </div>
+
+                <div className="contact-item">
+                  <span>Location</span>
+                  <p>Addis Ababa, Ethiopia</p>
+                </div>
+
+                <div className="contact-item">
+                  <span>Social</span>
+
+                  <div className="contact-socials">
+                    <a
+                      href="https://github.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      GitHub ↗
+                    </a>
+
+                    <a
+                      href="https://www.linkedin.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      LinkedIn ↗
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+
             </div>
+
           </div>
-
-          <form
-            className="contact-form"
-            onSubmit={handleFormSubmit}
-          >
-
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your name"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="your@email.com"
-                required
-              />
-
-              <ValidationError
-                prefix="Email"
-                field="email"
-                errors={state.errors}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Write your message..."
-                rows="6"
-                required
-              />
-
-              <ValidationError
-                prefix="Message"
-                field="message"
-                errors={state.errors}
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={state.submitting}
-            >
-              {state.submitting ? "Sending..." : "Send Message"}
-            </button>
-
-            {showSuccess && (
-              <p className="success-message">
-                Thank you! Your message has been sent successfully.
-              </p>
-            )}
-
-          </form>
-
-        </div>
+        )}
       </div>
-
     </section>
   );
 }

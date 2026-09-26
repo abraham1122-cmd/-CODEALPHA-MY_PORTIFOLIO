@@ -20,14 +20,14 @@ function About() {
             </h3>
 
             <p>
-              I am a front-end developer interested in building
+              I am a soft-ware developer interested in building
               modern, responsive and user-friendly web applications.
               I enjoy turning ideas into functional digital products.
             </p>
 
             <p>
               My development journey includes HTML, CSS, JavaScript,
-              React, Git, responsive design and working with APIs.
+              React, Next.js Git, responsive design and working with APIs.
               I continuously improve my problem-solving and software
               development skills through practical projects.
             </p>

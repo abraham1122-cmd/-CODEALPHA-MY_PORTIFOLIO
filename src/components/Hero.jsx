@@ -17,12 +17,12 @@ function Hero() {
           </h1>
 
           <h2>
-            Frontend Developer
+            SoftWare Developer
           </h2>
 
           <p className="hero-description">
             I build responsive, user-friendly and modern web
-            applications using JavaScript, React and modern
+            applications using modern
             web development technologies.
           </p>
 
@@ -65,7 +65,7 @@ function Hero() {
           <div className="image-wrapper">
 
             <img
-              src="/src/assets/port pro.jpg"
+              src="/src/assets/PORT.jpg"
               alt="Abraham Desta"
             />
 

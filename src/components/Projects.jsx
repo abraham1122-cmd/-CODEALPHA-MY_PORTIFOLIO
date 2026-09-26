@@ -5,44 +5,31 @@ import ProjectCard from "./ProjectCard";
 function Projects() {
   const [category, setCategory] = useState("All");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showProjects, setShowProjects] = useState(false);
 
-  const categories = [
-    "All",
-    "React",
-    "JavaScript",
-    "HTML/CSS"
-  ];
+  const categories = ["All", "React", "JavaScript", "HTML/CSS"];
 
   const filteredProjects =
     category === "All"
       ? projects
-      : projects.filter(
-          (project) => project.category === category
-        );
+      : projects.filter((project) => project.category === category);
 
- 
-  const infiniteProjects = [
-    ...filteredProjects,
-    ...filteredProjects
-  ];
+  const infiniteProjects = [...filteredProjects, ...filteredProjects];
 
- 
   useEffect(() => {
-    if (filteredProjects.length <= 1) return;
+    if (!showProjects || filteredProjects.length <= 1) return;
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => prev + 1);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [filteredProjects.length]);
+  }, [showProjects, filteredProjects.length]);
 
- 
   useEffect(() => {
     setCurrentIndex(0);
   }, [category]);
 
- 
   useEffect(() => {
     if (currentIndex === filteredProjects.length) {
       const timer = setTimeout(() => {
@@ -54,61 +41,67 @@ function Projects() {
   }, [currentIndex, filteredProjects.length]);
 
   return (
-    <section className="section" id="projects">
-
+    <section className="section projects-section" id="projects">
       <div className="container">
 
-        <div className="section-heading">
-          <p>My Recent Work</p>
-          <h2>Projects</h2>
-        </div>
+        {/* Project link */}
+        <button
+          className="projects-toggle"
+          onClick={() => setShowProjects(!showProjects)}
+        >
+          <span>Projects</span>
+          <span className="projects-arrow">
+            {showProjects ? "↑" : "↓"}
+          </span>
+        </button>
 
-        <div className="filter-buttons">
+        {/* Projects hidden until clicked */}
+        {showProjects && (
+          <div className="projects-content">
 
-          {categories.map((item) => (
-            <button
-              key={item}
-              className={
-                category === item
-                  ? "filter-btn active"
-                  : "filter-btn"
-              }
-              onClick={() => setCategory(item)}
-            >
-              {item}
-            </button>
-          ))}
+            <div className="section-heading">
+              {/* <p>My Recent Work</p>
+              <h2>Selected Projects</h2> */}
+            </div>
 
-        </div>
+            <div className="filter-buttons">
+              {categories.map((item) => (
+                <button
+                  key={item}
+                  className={
+                    category === item
+                      ? "filter-btn active"
+                      : "filter-btn"
+                  }
+                  onClick={() => setCategory(item)}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
 
-        <div className="project-slider">
-
-          <div
-            className="project-track"
-            style={{
-              transform: `translateX(-${currentIndex * 100}%)`,
-              transition:
-                currentIndex === filteredProjects.length
-                  ? "transform 0.8s ease-in-out"
-                  : "transform 0.8s ease-in-out"
-            }}
-          >
-
-            {infiniteProjects.map((project, index) => (
+            <div className="project-slider">
               <div
-                className="project-slide"
-                key={`${project.id}-${index}`}
+                className="project-track"
+                style={{
+                  transform: `translateX(-${currentIndex * 100}%)`,
+                  transition: "transform 0.8s ease-in-out",
+                }}
               >
-                <ProjectCard project={project} />
+                {infiniteProjects.map((project, index) => (
+                  <div
+                    className="project-slide"
+                    key={`${project.id}-${index}`}
+                  >
+                    <ProjectCard project={project} />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
 
           </div>
-
-        </div>
-
+        )}
       </div>
-
     </section>
   );
 }

@@ -1,4 +1,9 @@
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faInstagram,
+  faTelegram,
+  faFacebook,
+} from "@fortawesome/free-brands-svg-icons";
 
 function Footer() {
   return (
@@ -12,8 +17,39 @@ function Footer() {
           </h3>
 
           <p>
-            Frontend Developer building modern web experiences.
+            Software Developer building modern web experiences.
           </p>
+        </div>
+
+        <div className="footer-socials">
+
+          <a
+            href="https://instagram.com/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+          >
+            <FontAwesomeIcon icon={faInstagram} />
+          </a>
+
+          <a
+            href="https://t.me/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Telegram"
+          >
+            <FontAwesomeIcon icon={faTelegram} />
+          </a>
+
+          <a
+            href="https://facebook.com/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Facebook"
+          >
+            <FontAwesomeIcon icon={faFacebook} />
+          </a>
+
         </div>
 
         <div className="footer-links">
@@ -29,7 +65,7 @@ function Footer() {
 
       <div className="footer-bottom">
 
-        <p >
+        <p>
           © {new Date().getFullYear()} abraham-desta.
           all rights reserved.
         </p>

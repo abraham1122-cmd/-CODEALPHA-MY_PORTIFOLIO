@@ -36,7 +36,10 @@ const skills = [
   {
   name: "Python",
   icon: "🐍"
-}
+},
+
+{ name: "Next.js", 
+  icon: "▲" }
 ];
 
 export default skills;
