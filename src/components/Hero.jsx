@@ -1,5 +1,7 @@
 
 
+
+
 function Hero() {
   return (
     <section className="hero" id="home">
@@ -65,7 +67,7 @@ function Hero() {
           <div className="image-wrapper">
 
             <img
-              src="/src/assets/PORT.jpg"
+              src="/PORT.jpg"
               alt="Abraham Desta"
             />
 
